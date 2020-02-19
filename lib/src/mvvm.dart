@@ -16,10 +16,9 @@ abstract class ViewModel {
 }
 
 /// A [StatefulWidget] which provides a [ViewModel] to its child widgets.
-/// Handles the lifecycle of a [ViewModel] by using the [State]'s dispose
-/// functionality.
+/// Handles the lifecycle of a [ViewModel].
 ///
-/// See also [ViewModel].
+/// See also [ViewModel] and [ViewModelProviderState].
 class ViewModelProvider<T extends ViewModel> extends StatefulWidget {
   ViewModelProvider({
     Key key,
@@ -35,6 +34,9 @@ class ViewModelProvider<T extends ViewModel> extends StatefulWidget {
   ViewModelProviderState<T> createState() => ViewModelProviderState<T>();
 }
 
+/// [State] of [ViewModelProvider] which handles the lifecycle of a [ViewModel].
+///
+/// See also [ViewModel] and [ViewModelProvider].
 class ViewModelProviderState<T extends ViewModel>
     extends State<ViewModelProvider<T>> {
   T _viewModel;
