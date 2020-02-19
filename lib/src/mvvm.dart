@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+typedef ViewModelBuilder<T extends ViewModel> = T Function();
+
 /// Defines a ViewModel in a MVVM context.
 ///
 /// See also [ViewModelProvider].
@@ -26,8 +28,12 @@ class ViewModelProvider<T extends ViewModel> extends StatefulWidget {
     @required this.viewModelBuilder,
   }) : super(key: key);
 
-  final T Function() viewModelBuilder;
+  /// Builds the ViewModel.
+  /// Will be called by [ViewModelProviderState].
+  final ViewModelBuilder<T> viewModelBuilder;
 
+  /// Includes the child to be rendered.
+  /// Will be called by [ViewModelProviderState].
   final Widget child;
 
   @override
