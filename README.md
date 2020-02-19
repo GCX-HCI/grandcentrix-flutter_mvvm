@@ -2,7 +2,7 @@
 MVVM implementation for Flutter
 
 ## Installation
-This project is currently not published. So you have to install it as git dependency in your pubspec.yaml:
+This project is currently not published. So you have to install it as git dependency in your `pubspec.yaml`:
 
 ```
   flutter_mvvm:
