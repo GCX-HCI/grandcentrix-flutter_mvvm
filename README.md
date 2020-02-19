@@ -39,7 +39,8 @@ ViewModelProvider<LoginViewModel>(
     );
 ```
 
-Use the `ViewModel` by finding it in the `BuildContext` of your widget.
+Use the `ViewModel` by finding it in the `BuildContext` of your widget. 
+There is an extension for the `BuildContext` which you can use.
 
 ```
 class MyScreen extends StatefulWidget {
