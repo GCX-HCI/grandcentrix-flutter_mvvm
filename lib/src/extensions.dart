@@ -7,6 +7,6 @@ extension ContextViewModel on BuildContext {
   T findViewModel<T extends ViewModel>() {
     ViewModelProviderState<T> state =
         this.findAncestorStateOfType<ViewModelProviderState<T>>();
-    return state.viewModel;
+    return state?.viewModel;
   }
 }
