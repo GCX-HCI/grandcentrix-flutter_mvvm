@@ -5,6 +5,7 @@ MVVM implementation for Flutter
 This project is currently not published. So you have to install it as git dependency in your `pubspec.yaml`:
 
 ```
+dependencies:
   flutter_mvvm:
     git:
       url: git@github.gcxi.de:grandcentrix/flutter_mvvm.git
