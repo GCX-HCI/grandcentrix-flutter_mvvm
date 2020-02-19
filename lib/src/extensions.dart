@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
-
-import 'mvvm.dart';
+import 'package:flutter_mvvm/src/mvvm.dart';
 
 extension ContextViewModel on BuildContext {
   /// Returns the nearest ancestor [ViewModel] in the widget tree by its type.
