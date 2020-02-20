@@ -52,13 +52,13 @@ class ViewModelProviderState<T extends ViewModel>
   @override
   void initState() {
     super.initState();
-    _viewModel = widget.viewModelBuilder();
-    _viewModel.init();
+    _viewModel = widget.viewModelBuilder?.call();
+    _viewModel?.init();
   }
 
   @override
   void dispose() {
-    _viewModel.dispose();
+    _viewModel?.dispose();
     super.dispose();
   }
 
