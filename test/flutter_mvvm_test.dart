@@ -74,10 +74,8 @@ void main() {
       // and the ViewModelProvider is added to the tree
       await tester.pumpWidget(provider);
 
-      // Expect the ViewModel in the state to be initialized
-      ViewModelProviderState<TestViewModel> state =
-          tester.state(find.byWidget(provider));
-      expect(state.viewModel.initCalled, true);
+      // Expect the ViewModel to be initialized
+      expect(expectedViewModel.initCalled, true);
     });
 
     testWidgets('ViewModel is disposed', (WidgetTester tester) async {
@@ -88,13 +86,11 @@ void main() {
 
       // and the ViewModelProvider is added to the tree
       await tester.pumpWidget(provider);
-      ViewModelProviderState<TestViewModel> state =
-          tester.state(find.byWidget(provider));
       // and then again removed from the tree
       await tester.pumpWidget(Placeholder());
 
       // Expect the ViewModel in the state to be disposed
-      expect(state.viewModel.disposeCalled, true);
+      expect(expectedViewModel.disposeCalled, true);
     });
   });
 
@@ -103,16 +99,12 @@ void main() {
         (WidgetTester tester) async {
       // After a ViewModelProvider is created with a -valid- ViewModelBuilder
       TestViewModel expectedViewModel = TestViewModel();
+      TestViewModel actualViewModel;
       ViewModelProvider<TestViewModel> provider = ViewModelProvider(
         viewModelBuilder: () => expectedViewModel,
         child: Builder(
           builder: (BuildContext context) {
-            // Expect findViewModel to return the ViewModel
-            TestViewModel actualViewModel =
-                context.findViewModel<TestViewModel>();
-            expect(actualViewModel, expectedViewModel);
-
-            // The builder function must return a widget.
+            actualViewModel = context.findViewModel<TestViewModel>();
             return Placeholder();
           },
         ),
@@ -120,21 +112,19 @@ void main() {
 
       // and the ViewModelProvider is added to the tree
       await tester.pumpWidget(provider);
+      // Expect the ViewModel to be available
+      expect(actualViewModel, expectedViewModel);
     });
 
     testWidgets('findViewModel returns null if not found via BuildContext',
         (WidgetTester tester) async {
+      TestViewModel viewModel;
       // After a ViewModelProvider is created with an -invalid- ViewModelBuilder
       ViewModelProvider<TestViewModel> provider = ViewModelProvider(
         viewModelBuilder: null,
         child: Builder(
           builder: (BuildContext context) {
-            // Expect findViewModel to return null
-            TestViewModel actualViewModel =
-                context.findViewModel<TestViewModel>();
-            expect(actualViewModel, isNull);
-
-            // The builder function must return a widget.
+            viewModel = context.findViewModel<TestViewModel>();
             return Placeholder();
           },
         ),
@@ -142,6 +132,8 @@ void main() {
 
       // and the ViewModelProvider is added to the tree
       await tester.pumpWidget(provider);
+      // Expect the ViewModel to be null
+      expect(viewModel, isNull);
     });
   });
 }
