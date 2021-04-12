@@ -23,9 +23,9 @@ abstract class ViewModel {
 /// See also [ViewModel] and [ViewModelProviderState].
 class ViewModelProvider<T extends ViewModel> extends StatefulWidget {
   ViewModelProvider({
-    Key key,
-    @required this.child,
-    @required this.viewModelBuilder,
+    Key? key,
+    required this.child,
+    required this.viewModelBuilder,
   }) : super(key: key);
 
   /// Builds the ViewModel.
@@ -45,20 +45,20 @@ class ViewModelProvider<T extends ViewModel> extends StatefulWidget {
 /// See also [ViewModel] and [ViewModelProvider].
 class ViewModelProviderState<T extends ViewModel>
     extends State<ViewModelProvider<T>> {
-  T _viewModel;
+  late T _viewModel;
 
   T get viewModel => _viewModel;
 
   @override
   void initState() {
     super.initState();
-    _viewModel = widget.viewModelBuilder?.call();
-    _viewModel?.init();
+    _viewModel = widget.viewModelBuilder.call();
+    _viewModel.init();
   }
 
   @override
   void dispose() {
-    _viewModel?.dispose();
+    _viewModel.dispose();
     super.dispose();
   }
 
