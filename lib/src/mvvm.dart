@@ -30,11 +30,11 @@ class ViewModelProvider<T extends ViewModel> extends StatefulWidget {
 
   /// Builds the ViewModel.
   /// Will be called by [ViewModelProviderState].
-  late final ViewModelBuilder<T> viewModelBuilder;
+  final ViewModelBuilder<T> viewModelBuilder;
 
   /// Includes the child to be rendered.
   /// Will be called by [ViewModelProviderState].
-  late final Widget child;
+  final Widget child;
 
   @override
   ViewModelProviderState<T> createState() => ViewModelProviderState<T>();
