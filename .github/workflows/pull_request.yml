@@ -1,0 +1,39 @@
+# This workflow checks if the project can be built correctly and runs its unit tests
+# This workflow only runs if a Pull Request is (re-)opened and it is not a draft
+# or after a push to the default branch
+# For more information about best practices, see:
+# https://grandcentrix.atlassian.net/wiki/spaces/TENG/pages/31180230199/GitHub+Actions+Best+Practices
+
+name: Pull Request
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    types: [opened, reopened, ready_for_review, synchronize]
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || !github.event.pull_request.draft
+    timeout-minutes: 30
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+      - name: Install dependencies
+        run: dart pub get
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+      - name: Analyze project source
+        run: dart analyze
+      - name: Run tests
+        run: dart test
