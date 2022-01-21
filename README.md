@@ -9,7 +9,7 @@ dependencies:
   flutter_mvvm:
     git:
       url: git@github.com:GCX-HCI/grandcentrix-flutter_mvvm.git
-      ref: v0.1.1
+      ref: v0.1.2
 ```
 
 ## Usage
